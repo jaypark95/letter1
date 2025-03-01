@@ -5,34 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Letter with Music</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Georgia&display=swap');
+
         body {
             font-family: 'Georgia', serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f8ff;
+            background: linear-gradient(-45deg, #ffdde1, #ee9ca7, #ffdde1, #ff69b4);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            text-align: center;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .header {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            padding: 15px;
+            width: 80%;
+            background: rgba(255, 20, 147, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            text-shadow: 2px 2px 10px rgba(255, 20, 147, 0.6);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            font-family: 'Dancing Script', cursive;
+            letter-spacing: 1px;
         }
 
         .container {
-            text-align: center;
+            margin-top: 50px;
+            position: relative;
         }
 
         #playButton, #closeButton {
             padding: 15px 30px;
             font-size: 18px;
+            font-weight: bold;
             color: white;
-            background-color: #ff69b4;
+            background: linear-gradient(to right, #ff69b4, #ff1493);
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             margin: 10px;
         }
 
         #playButton:hover, #closeButton:hover {
-            background-color: #ff1493;
+            transform: scale(1.1);
+            background: linear-gradient(to right, #ff1493, #ff69b4);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
         }
 
         #letter {
@@ -41,67 +73,88 @@
             color: #333;
             background: #fffaf0;
             border: 2px solid #ff69b4;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
             animation: fadeIn 2s, slideIn 1s;
             max-width: 600px;
             display: none;
             position: relative;
+            border-radius: 12px;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 1s ease-in-out;
         }
 
         .letter-content {
-            position: relative;
             padding: 20px;
             background: #fffaf0;
             border: 1px dashed #ff69b4;
-            box-shadow: inset 0 0 10px rgba(255, 105, 184, 0.5);
+            box-shadow: inset 0 0 15px rgba(255, 105, 184, 0.5);
+            font-family: 'Dancing Script', cursive;
+            font-size: 22px;
+            line-height: 1.6;
         }
 
-        .letter-content::before {
-            content: '';
+        .wax-seal {
             position: absolute;
-            top: -10px;
+            bottom: -20px;
             left: 50%;
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 10px solid #fffaf0;
             transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: red;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateX(-50%) translateY(0); }
+            to { transform: translateX(-50%) translateY(5px); }
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes slideIn {
-            from {
-                transform: translateY(-50px);
-            }
-            to {
-                transform: translateY(0);
-            }
+            from { transform: translateY(-50px); }
+            to { transform: translateY(0); }
+        }
+
+        #playButton {
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px #ff69b4; }
+            50% { box-shadow: 0 0 20px #ff1493; }
+            100% { box-shadow: 0 0 5px #ff69b4; }
         }
     </style>
 </head>
 <body>
+    <div class="header">SOCSCI 1105: The Contemporary World</div>
     <div class="container">
         <button id="playButton">Open Letter</button>
         <div id="letter">
             <div class="letter-content">
                 <p>Dear Sir Jayson,</p>
-                <p>We hope this message finds you in good health. We will take this opportunity to thank you for the knowledge and lessons you conveyed to us throughout this first term. Your dedication to teaching has helped us develop and improve in this subject.  </p>
-                <p>However, as the exams approach, we ask for your kind consideration regarding the number of exam items. The workload has been overwhelming with several subjects to review, and we are only trying to balance our time well. </p>
-                <p>We understand very well that assessments are, however, important, but if ever this is possible, we would humbly request a few less examination items then, we might be able to grasp the concepts rather than rushing to complete answers within the given time.  </p>
-                <p>We greatly appreciate your consideration, and regardless of your decision, we will still try our best in your class. Thanks for your guidance and your continued effort always to make us better.  </p>
+                <p>We hope this message finds you in good health. We will take this opportunity to thank you for the knowledge and lessons you conveyed to us throughout this first term. Your dedication to teaching has helped us develop and improve in this subject.</p>
+                <p>However, as the exams approach, we ask for your kind consideration regarding the number of exam items. The workload has been overwhelming with several subjects to review, and we are only trying to balance our time well.</p>
+                <p>We understand very well that assessments are important, but if ever this is possible, we would humbly request a few fewer examination items, so we might be able to grasp the concepts rather than rushing to complete answers within the given time.</p>
+                <p>We greatly appreciate your consideration, and regardless of your decision, we will still try our best in your class. Thanks for your guidance and your continued effort always to make us better.</p>
                 <p>Sincerely,</p>
                 <p>BSIT 2-1</p>
             </div>
+            <div class="wax-seal">❤️</div>
             <button id="closeButton">Close Letter</button>
         </div>
         <audio id="backgroundMusic" loop>
@@ -110,12 +163,15 @@
         </audio>
     </div>
     <script>
+        
         document.getElementById('playButton').addEventListener('click', function() {
             var audio = document.getElementById('backgroundMusic');
             var letter = document.getElementById('letter');
 
-            audio.play();
+            audio.play().catch(error => console.log("Autoplay failed: ", error));
             letter.style.display = 'block';
+            letter.style.opacity = '1';
+            letter.style.transform = 'translateY(0)';
         });
 
         document.getElementById('closeButton').addEventListener('click', function() {
@@ -124,8 +180,10 @@
 
             audio.pause();
             audio.currentTime = 0;
-            letter.style.display = 'none';
+            letter.style.opacity = '0';
+            letter.style.transform = 'translateY(50px)';
+            setTimeout(() => letter.style.display = 'none', 500);
         });
-    </script>
+    </script> 
 </body>
 </html>
